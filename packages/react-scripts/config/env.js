@@ -63,11 +63,12 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
-const REACT_APP = /^REACT_APP_/i;
+const { clientEnv } = require(paths.appPackageJson);
+const REACT_APP_RE = clientEnv ? new RegExp(`^${ clientEnv.join('|') }$`, 'i') : /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
-    .filter(key => REACT_APP.test(key))
+    .filter(key => REACT_APP_RE.test(key))
     .reduce(
       (env, key) => {
         env[key] = process.env[key];
@@ -84,6 +85,14 @@ function getClientEnvironment(publicUrl) {
         PUBLIC_URL: publicUrl,
       }
     );
+
+  // Add missing `clientEnv` vars with empty values. Useful to disable features on client.
+  if (clientEnv) {
+    clientEnv.forEach(key => {
+      raw[key] = raw[key] || '';
+    })
+  }
+
   // Stringify all values so we can feed into Webpack DefinePlugin
   const stringified = {
     'process.env': Object.keys(raw).reduce((env, key) => {
