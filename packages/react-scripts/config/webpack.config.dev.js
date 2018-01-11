@@ -211,7 +211,7 @@ module.exports = {
                   ],
                 },
               },
-              // Pavek: add SCSS support
+              // This fork has SCSS support
               require.resolve('sass-loader'),
             ],
           },
