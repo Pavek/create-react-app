@@ -17,6 +17,6 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-[{*.scss,*.json,*.babelrc,*.js}]
+[{*.scss,*.json,*.babelrc,*.config.*js}]
 indent_style = space
 indent_size = 2
