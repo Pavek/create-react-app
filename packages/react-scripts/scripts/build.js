@@ -76,7 +76,8 @@ measureFileSizesBeforeBuild(paths.appBuild)
             ' to the line before.\n'
         );
       } else {
-        console.log(chalk.green('[Client] Compiled successfully.\n'));
+        const { time } = stats.toJson({ timings: true });
+        console.log(chalk.green('[Client] Compiled successfully after'), chalk.white(time + ' ms'));
       }
 
       console.log('[Client] File sizes after gzip:');
