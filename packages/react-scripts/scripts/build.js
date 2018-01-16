@@ -64,7 +64,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
   .then(
     ({ stats, previousFileSizes, warnings }) => {
       if (warnings.length) {
-        console.log(chalk.yellow('[Client] Compiled with warnings.\n'));
+        console.log(chalk.yellow('[client] Compiled with warnings.\n'));
         console.log(warnings.join('\n\n'));
         console.log(
           '\nSearch for the ' +
@@ -78,10 +78,10 @@ measureFileSizesBeforeBuild(paths.appBuild)
         );
       } else {
         const { time } = stats.toJson({ timings: true });
-        console.log(chalk.green('[Client] Compiled successfully after'), chalk.white(time + ' ms'));
+        console.log(chalk.green('[client] Compiled successfully after'), chalk.white(time + ' ms'));
       }
 
-      console.log('[Client] File sizes after gzip:');
+      console.log('[client] File sizes after gzip:');
       printFileSizesAfterBuild(
         stats,
         previousFileSizes,
@@ -112,7 +112,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
-  console.log('[Client] Creating an optimized production build...');
+  console.log('[client] Creating an optimized production build...');
 
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {
