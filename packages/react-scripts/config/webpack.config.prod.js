@@ -193,7 +193,7 @@ module.exports = {
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
           {
-            test: /\.scss$/,
+            test: [/\.css$/, /\.scss$/],
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -207,7 +207,7 @@ module.exports = {
                     {
                       loader: require.resolve('css-loader'),
                       options: {
-                        importLoaders: 2,
+                        importLoaders: 2, // <--
                         minimize: true,
                         sourceMap: shouldUseSourceMap,
                       },
@@ -233,9 +233,9 @@ module.exports = {
                         ],
                       },
                     },
-                    // This fork has SCSS support
+                    // Pavek: add SCSS support (CSS is subset of it)
                     {
-                      loader: require.resolve('sass-loader'),
+                      loader: require.resolve('sass-loader'), // <--
                       options: {
                         sourceMap: shouldUseSourceMap,
                       },
